@@ -1,6 +1,7 @@
 
 import express from 'express';
-import { createUser, loginUser, logoutUser } from '../controllers/user.controller.js';
+import { createUser, getMe, loginUser, logoutUser } from '../controllers/user.controller.js';
+import { authMiddleware } from '../middleware/auth.middleware.js';
 
 const authRouter = express.Router() ;
 
@@ -30,13 +31,12 @@ authRouter.post('/login', loginUser);
 authRouter.get('/logout', logoutUser);
 
 /**
- * @route POST /api/auth/blacklist
- * @description Add a token to blacklist
- * @access public
- * 
+ * @route POST /api/auth/get-me
+ * @description Get user details
+ * @access private
  */
 
-// authRouter.post('/blacklist', );
+authRouter.get("/get-me", authMiddleware, getMe)
 
 
 

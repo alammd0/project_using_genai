@@ -150,3 +150,44 @@ export const logoutUser = async (req, res) => {
         })
     }
 }
+
+/**
+ * @route GET /api/auth/get-me
+ * @description Get user details
+ * @access private
+ */
+
+export const getMe = async (req, res) => {
+    try {
+
+        // fetch the userId 
+
+        console.log(req.user);
+
+        const userId = req.user.id;
+
+        console.log(userId);
+
+        const user = await User.findById(userId) ; 
+
+        if(!user) {
+            return res.status(400).json({
+                message : "User does not exist"
+            })
+        }
+
+        return res.status(200).json({
+            message : "User details fetched successfully",
+            user : {
+                id : user._id,
+                username : user.username,
+                email : user.email
+            }
+        })
+    }
+    catch (error) {
+        return res.status(500).json({
+            message : "Internal Server Error"
+        })
+    }
+}
