@@ -30,6 +30,14 @@ export default function Login() {
 
     const navigate = useNavigate();
 
+    if(loading) {
+        return (
+            <main>
+                <h2>Loading...</h2>
+            </main>
+        )
+    }
+
     return (
         <main>
             <div className="from-container">
