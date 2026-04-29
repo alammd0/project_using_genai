@@ -3,16 +3,9 @@ dotenv.config();
 
 import app from './src/server.js';
 import connectDB from './src/config/db.js';
-import { resume, selfDescription, jobDescription } from './src/services/temp.js';
-import { generateInterviewReport } from './src/services/ai.service.js';
-
 
 
 connectDB();
-
-
-generateInterviewReport({ resume, selfDescription, jobDescription });
-
 
 // test route
 app.get('/', (req, res) => {
